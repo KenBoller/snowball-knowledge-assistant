@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from api.health import router as health_router
 from app.config import APP_NAME, APP_VERSION
+from api.documents import router as documents_router
 
 app = FastAPI(
     title=APP_NAME,
@@ -8,7 +9,7 @@ app = FastAPI(
 )
 
 app.include_router(health_router)
-
+app.include_router(documents_router)
 
 @app.get("/")
 def root():
