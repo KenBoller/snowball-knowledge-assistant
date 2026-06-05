@@ -5,6 +5,8 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from app.config import UPLOAD_DIR
 
+from services.pdf_service import extract_text_from_pdf
+
 router = APIRouter(
     prefix="/documents",
     tags=["documents"],
@@ -32,12 +34,15 @@ async def upload_document(file: UploadFile = File(...)):
     with open(saved_path, "wb") as uploaded_file:
         uploaded_file.write(file_content)
 
+    pdf_data = extract_text_from_pdf(saved_path)
+
     return {
         "message": "Document uploaded successfully.",
         "document_id": document_id,
         "original_filename": file.filename,
         "saved_filename": saved_filename,
-        "saved_path": str(saved_path),
         "content_type": file.content_type,
         "size_bytes": len(file_content),
+        "page_count": pdf_data["page_count"],
+        "text_length": pdf_data["text_length"],
     }
