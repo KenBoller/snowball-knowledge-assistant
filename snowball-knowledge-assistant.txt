@@ -1,0 +1,46 @@
+snowball-knowledge-assistant/
+│
+├── app/
+│   ├── main.py
+│   ├── config.py
+│
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── health.py
+│   │   ├── documents.py
+│   │   └── ask.py
+│
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── pdf_service.py
+│   │   ├── chunking_service.py
+│   │   ├── embedding_service.py
+│   │   ├── vector_service.py
+│   │   └── rag_service.py
+│
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   ├── document.py
+│   │   └── ask.py
+│
+│   └── utils/
+│       ├── __init__.py
+│       └── file_utils.py
+│
+├── uploads/
+│   └── .gitkeep
+│
+├── chroma_store/
+│   └── .gitkeep
+│
+├── tests/
+│   ├── __init__.py
+│   └── test_health.py
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── Dockerfile
+├── README.md
+├── requirements.txt
+└── pytest.ini
