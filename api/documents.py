@@ -7,6 +7,8 @@ from app.config import UPLOAD_DIR
 
 from services.pdf_service import extract_text_from_pdf
 from services.chunking_service import chunk_text
+from services.embedding_service import create_embedding
+from services.vector_service import add_chunks_to_collection
 
 router = APIRouter(
     prefix="/documents",
@@ -38,6 +40,15 @@ async def upload_document(file: UploadFile = File(...)):
     pdf_data = extract_text_from_pdf(saved_path)
     chunks = chunk_text(pdf_data["full_text"])
     
+    embeddings = [create_embedding(chunk["text"]) for chunk in chunks]
+
+    stored_chunk_count = add_chunks_to_collection(
+        chunks=chunks,
+        document_id=document_id,
+        filename=file.filename,
+        embeddings=embeddings,
+    )
+
     return {
         "message": "Document uploaded successfully.",
         "document_id": document_id,
@@ -48,4 +59,5 @@ async def upload_document(file: UploadFile = File(...)):
         "page_count": pdf_data["page_count"],
         "text_length": pdf_data["text_length"],
         "chunk_count": len(chunks),
+        "stored_chunk_count": stored_chunk_count,
     }
