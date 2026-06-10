@@ -21,7 +21,7 @@ Built as a portfolio project to demonstrate modern AI application development us
 
 ### Embeddings
 - Generate vector embeddings from document chunks
-- OpenAI Embedding API integration
+- Local embeddings via Ollama
 - Designed to support local embedding models in future versions
 
 ### Vector Database
@@ -63,7 +63,7 @@ Built as a portfolio project to demonstrate modern AI application development us
                        ▼
               ┌──────────────────┐
               │   Embeddings     │
-              │    (OpenAI)      │
+              │    (Ollama)      │
               └────────┬─────────┘
                        │
                        ▼
@@ -247,8 +247,13 @@ Current response:
 ```json
 {
   "question": "Who is Kenneth Boller?",
-  "answer": "RAG answer generation is not connected yet.",
-  "sources": []
+  "answer": "Kenneth Boller is a Python Backend Engineer and AI Automation Engineer...",
+  "sources": [
+    {
+      "filename": "KB_resume.pdf",
+      "chunk_index": 3
+    }
+  ]
 }
 ```
 
@@ -292,10 +297,11 @@ Implemented:
 - FastAPI API
 - Swagger Documentation
 - Automated Tests
+- Full RAG Answer Generation
+- Local LLM Integration (Ollama)
 
 In Progress:
 
-- Full RAG Answer Generation
 - Citation-Aware Responses
 - Local Embedding Models
 - Docker Validation
@@ -318,7 +324,8 @@ In Progress:
 
 - Python
 - FastAPI
-- OpenAI Embeddings
+- Local embeddings
+- Ollama
 - ChromaDB
 - PyMuPDF
 - Pytest

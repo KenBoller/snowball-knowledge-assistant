@@ -14,3 +14,6 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 
 UPLOAD_DIR = BASE_DIR / "uploads"
 CHROMA_DIR = BASE_DIR / "chroma_store"
+
+EMBEDDING_PROVIDER = os.getenv("EMBEDDING_PROVIDER", "local")
+EMBEDDING_DIMENSIONS = 384

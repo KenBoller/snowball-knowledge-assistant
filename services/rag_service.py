@@ -1,5 +1,5 @@
 from openai import OpenAI
-
+import ollama
 from app.config import OPENAI_API_KEY
 from services.retrieval_service import retrieve_relevant_chunks
 
@@ -61,12 +61,48 @@ def answer_question(question: str, result_count: int = 5) -> dict:
     )
 
     context = build_context(chunks)
-    answer = generate_answer(question, context)
+
+    if not context:
+        return {
+            "question": question,
+            "answer": "No relevant information found.",
+            "sources": [],
+        }
+
+    try:
+        response = ollama.chat(
+            model="llama3.1:latest",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are Snowball Knowledge Assistant.\n"
+                        "Answer ONLY using the provided context.\n"
+                        "If the answer is not in the context, say "
+                        "'I could not find that information in the uploaded documents.'"
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": f"""
+Question:
+{question}
+
+Context:
+{context}
+""",
+                },
+            ],
+        )
+
+        answer = response["message"]["content"]
+
+    except Exception as e:
+        answer = f"Error calling Ollama: {str(e)}"
 
     return {
         "question": question,
         "answer": answer,
-        "context": context,
         "sources": [
             {
                 "filename": chunk.get("metadata", {}).get("filename"),
