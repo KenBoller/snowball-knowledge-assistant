@@ -1,3 +1,6 @@
+from openai import OpenAI
+
+from app.config import OPENAI_API_KEY
 from services.retrieval_service import retrieve_relevant_chunks
 
 
@@ -23,6 +26,34 @@ def build_context(chunks: list[dict]) -> str:
     return "\n\n---\n\n".join(context_parts)
 
 
+def generate_answer(question: str, context: str) -> str:
+    if not OPENAI_API_KEY:
+        return "LLM answer generation requires OPENAI_API_KEY to be configured."
+
+    client = OpenAI(api_key=OPENAI_API_KEY)
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are Snowball Knowledge Assistant. "
+                    "Answer using only the provided context. "
+                    "If the answer is not in the context, say you do not know. "
+                    "Be concise and include source references when possible."
+                ),
+            },
+            {
+                "role": "user",
+                "content": f"Context:\n{context}\n\nQuestion:\n{question}",
+            },
+        ],
+    )
+
+    return response.choices[0].message.content
+
+
 def answer_question(question: str, result_count: int = 5) -> dict:
     chunks = retrieve_relevant_chunks(
         question=question,
@@ -30,10 +61,11 @@ def answer_question(question: str, result_count: int = 5) -> dict:
     )
 
     context = build_context(chunks)
+    answer = generate_answer(question, context)
 
     return {
         "question": question,
-        "answer": "RAG answer generation is not connected yet.",
+        "answer": answer,
         "context": context,
         "sources": [
             {
