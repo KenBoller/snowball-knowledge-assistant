@@ -6,6 +6,22 @@ Built as a portfolio project to demonstrate modern AI application development us
 
 ---
 
+## Screenshots
+
+### Swagger API
+
+[screenshot]
+
+### Upload Document
+
+[screenshot]
+
+### Ask Question
+
+[screenshot]
+
+---
+
 ## Features
 
 ### Document Processing
@@ -162,13 +178,15 @@ pip install -r requirements.txt
 
 ---
 
-# Environment Variables
+## Environment Variables
 
-Create a `.env` file:
+Optional:
 
 ```env
-OPENAI_API_KEY=your_api_key_here
+OLLAMA_MODEL=llama3.1
 ```
+
+No OpenAI API key is required for local usage.
 
 ---
 
