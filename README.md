@@ -10,15 +10,19 @@ Built as a portfolio project to demonstrate modern AI application development us
 
 ### Swagger API
 
-[screenshot]
+![Swagger API](docs/images/swagger-homepage.png)
 
 ### Upload Document
 
-[screenshot]
+![Upload Document](docs/images/upload-endpoint.png)
 
 ### Ask Question
 
-[screenshot]
+![Ask Question](docs/images/ask-endpoint.png)
+
+### Returned Answer
+
+![Returned Answer](docs/images/returned-answer.png)
 
 ---
 
