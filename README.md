@@ -156,7 +156,7 @@ snowball-knowledge-assistant/
 Clone the repository:
 
 ```bash
-git clone https://github.com/Fll0yd/snowball-knowledge-assistant.git
+git clone https://github.com/KenBoller/snowball-knowledge-assistant.git
 cd snowball-knowledge-assistant
 ```
 
@@ -363,4 +363,4 @@ In Progress:
 Python Backend Developer | AI Automation | FastAPI | RAG Systems | SOC Automation
 
 GitHub:
-https://github.com/Fll0yd
+https://github.com/KenBoller
