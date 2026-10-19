@@ -1,5 +1,7 @@
 # ❄️ Snowball Knowledge Assistant
 
+[![Run Tests](https://github.com/KenBoller/snowball-knowledge-assistant/actions/workflows/tests.yml/badge.svg)](https://github.com/KenBoller/snowball-knowledge-assistant/actions/workflows/tests.yml)
+
 A FastAPI-powered Retrieval-Augmented Generation (RAG) knowledge assistant that ingests PDF documents, extracts and chunks text, generates embeddings, stores vectors in ChromaDB, and retrieves relevant context for question answering.
 
 Built as a portfolio project to demonstrate modern AI application development using Python, FastAPI, vector databases, embeddings, semantic search, testing, and containerization.
